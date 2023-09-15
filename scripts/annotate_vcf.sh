@@ -41,7 +41,7 @@ for vcf_file in ${VCFS_PATH}/*.vcf; do
 
     # Convert the filtered VCF to ClassifyCNV input format
     bed_file="./data/$(basename "$vcf_file").bed"
-    python3 vcf2bed.py "${filtered_vcf}" "${bed_file}"
+    python3 scripts/vcf2bed.py "${filtered_vcf}" "${bed_file}"
 
     # Annotate with ClassifyCNV
     result_dir=$(python3 "${CLASSIFYCNV_PATH}/ClassifyCNV.py" --infile "${bed_file}" --GenomeBuild hg38 2>&1 | grep -oP 'Results saved to \K.*')
