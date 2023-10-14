@@ -9,14 +9,15 @@ if len(sys.argv) != 3:
 input_file = sys.argv[1]
 output_file = sys.argv[2]
 
-# Open the input and output files
+
 with open(input_file, "r", encoding="utf-8") as infile, open(output_file, "w", encoding="utf-8") as outfile:
-    # Iterate through each line in the input file
     for line in infile:
         if not line.startswith("#"):
-            # Split the line into columns based on tabs
+            
+            # Split the line into columns
             columns = line.strip().split("\t")
             
+            # Extract the columns with  chr, start, end, type
             new_columns = [
                 columns[0],
                 columns[2].split(":")[-1].split("-")[-2],
@@ -24,8 +25,5 @@ with open(input_file, "r", encoding="utf-8") as infile, open(output_file, "w", e
                 columns[4][1:-1]
             ]
             
-            # Create a new line with only the desired columns
             new_line = "\t".join(new_columns)
-            
-            # Write the new line to the output file
             outfile.write(new_line + "\n")
